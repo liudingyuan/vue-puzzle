@@ -4,6 +4,7 @@
   "description": "a simple puzzle game with vuejs",
   "main": "index.js",
   "scripts": {
+    "build": "webpack --progress --profile --colors --display-modules",
     "dev": "webpack-dev-server --inline --hot"
   },
   "repository": {

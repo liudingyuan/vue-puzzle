@@ -3,5 +3,7 @@ var puzzle = require('./components/puzzle.vue');
 
 new Vue({
 	el:  '#app',
-	components: {puzzle}
+	components: {
+		'puzzle': puzzle
+	}
 });

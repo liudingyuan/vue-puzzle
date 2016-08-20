@@ -1,3 +1,5 @@
+var webpack = require('webpack');
+
 module.exports = {
 	entry: './src/main.js',
 	output: {
@@ -12,13 +14,23 @@ module.exports = {
             }
 		]
 	},
-	bable: {
+	babel: {
 		presets: ['es2015']
 	},
-	devServer: {
-		historyApiFallback: true,
-		hot: true,
-		inline: true,
-		progress: true
-	}
+	// devServer: {
+	// 	historyApiFallback: true,
+	// 	hot: true,
+	// 	inline: true,
+	// 	progress: true
+	// },
+	plugins: [
+		new webpack.optimize.UglifyJsPlugin({
+			compress: {
+				warnings: false
+			},
+			output: {
+				comments: false
+			}
+		})
+	]
 };

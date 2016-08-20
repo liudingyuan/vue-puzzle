@@ -3,8 +3,9 @@
 		<ul class="puzzle-container">
 			<li 
 			v-for="puzzle in puzzles"
-			v-text="puzzle.id"
-			@click="move($index)"></li>
+			:class="{'empty': !puzzle}"
+			@click="move($index)">
+			<img :src="puzzle.pic" alt=""></li>
 		</ul>
 		<button @click="render">重置</button>
 	</div>
@@ -24,7 +25,7 @@
 			render () {
 				let arr = [];
 				for (let i = 0;i < 15;i++) {
-					arr.push({id: i});
+					arr.push({id: i, pic: '/assets/imgs/pic' + i + '.png'});
 				}
 				this.puzzles = arr.sort(() => Math.random() - 0.5);
 				this.puzzles.push('');
@@ -72,7 +73,7 @@
 		top: 50%;
 		left: 50%;
 		width: 40%;
-		border: 1px solid #333;
+		border: 1px solid #ccc;
 		-webkit-transform: translate(-50%, -50%);
 		transform: translate(-50%, -50%);
 
@@ -104,11 +105,19 @@
         
         li {
         	float: left;
-        	border: 1px solid pink;
         	list-style: none;
         	width: 25%;
         	height: 25%;
         	cursor: pointer;
+        }
+
+        .empty {
+        	cursor: default;
+        }
+
+        img {
+        	max-width: 100%;
+        	height: auto;
         }
 	}
 </style>
