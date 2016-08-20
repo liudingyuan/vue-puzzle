@@ -95,9 +95,12 @@
 			cursor: pointer;
 		}
 	}
-	@media only screen and (max-width: 568px) {
-		.puzzle {width: 100%;}
+
+	@media only screen 
+	and (min-device-width : 320px) and (max-device-width : 480px) {
+	  .puzzle {width: 100%;}
 	}
+
 	.puzzle-container {
 		position: absolute;
 		width: 100%;
