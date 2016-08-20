@@ -5,9 +5,12 @@
 			v-for="puzzle in puzzles"
 			:class="{'empty': !puzzle}"
 			@click="move($index)">
-			<img :src="puzzle.pic" alt=""></li>
+			<img :src="puzzle.pic" alt="">
+			<span v-text="puzzle.id" v-if="show"></span>
+			</li>
 		</ul>
 		<button @click="render">重置</button>
+		<button @click="showTips">提示</button>
 	</div>
 </template>
 
@@ -15,7 +18,8 @@
 	export default {
 		data () {
 			return {
-				puzzles: []
+				puzzles: [],
+				show: false
 			}
 		},
 		ready () {
@@ -62,6 +66,9 @@
 						alert('success!');
 					}
 				}
+			},
+			showTips () {
+				this.show = !this.show;
 			}
 		}
 	}
@@ -94,6 +101,10 @@
 			color: #fff;
 			cursor: pointer;
 		}
+
+		button + button {
+			right: 0;
+		}
 	}
 
 	@media only screen 
@@ -107,6 +118,7 @@
 		height: 100%;
         
         li {
+        	position: relative;
         	float: left;
         	list-style: none;
         	width: 25%;
@@ -122,6 +134,11 @@
         	width: 100%;
         	max-width: 100%;
         	height: auto;
+        }
+
+        span {
+        	position: absolute;
+        	top: 0;
         }
 	}
 </style>
