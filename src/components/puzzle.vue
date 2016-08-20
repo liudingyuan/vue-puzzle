@@ -25,7 +25,7 @@
 			render () {
 				let arr = [];
 				for (let i = 0;i < 15;i++) {
-					arr.push({id: i, pic: '/assets/imgs/pic' + i + '.png'});
+					arr.push({id: i, pic: './assets/imgs/pic' + i + '.png'});
 				}
 				this.puzzles = arr.sort(() => Math.random() - 0.5);
 				this.puzzles.push('');
