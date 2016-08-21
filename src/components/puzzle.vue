@@ -4,9 +4,9 @@
 			<li 
 			v-for="puzzle in puzzles"
 			:class="{'empty': !puzzle}"
-			@click="move($index)">
+			@click.prevent="move($index)">
 			<img :src="puzzle.pic" alt="">
-			<span v-text="puzzle.id" v-if="show"></span>
+			<span v-text="puzzle.id >= 0 ? puzzle.id + 1 : ''" v-if="show"></span>
 			</li>
 		</ul>
 		<button @click="render">重置</button>
@@ -57,13 +57,15 @@
 				else if (left === '') {
 					this.changePos(index, index - 1, cur);
 				}
+				
+				this.isSuccess();
 			},
 			isSuccess () {
-				if (this.puzzles[10] === '') {
+				if (this.puzzles[15] === '') {
 					let arr = this.puzzles.slice(0, 15);
 
 					if (arr.every((item, index) => item.id === index)) {
-						alert('success!');
+						setTimeout(() => alert('success!'), 500);
 					}
 				}
 			},
@@ -80,7 +82,6 @@
 		top: 50%;
 		left: 50%;
 		width: 40%;
-		border: 1px solid #ccc;
 		-webkit-transform: translate(-50%, -50%);
 		transform: translate(-50%, -50%);
 
@@ -108,7 +109,16 @@
 	}
 
 	@media only screen 
-	and (min-device-width : 320px) and (max-device-width : 480px) {
+	and (min-width : 320px) and (max-width : 480px) {
+	  .puzzle {width: 100%;}
+	}
+	/* iPads (landscape) ----------- */
+	@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+	  .puzzle {width: 60%;}
+	}
+
+	/* iPads (portrait) ----------- */
+	@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
 	  .puzzle {width: 100%;}
 	}
 
@@ -121,6 +131,7 @@
         	position: relative;
         	float: left;
         	list-style: none;
+        	border: 1px solid #ecf0f1;
         	width: 25%;
         	height: 25%;
         	cursor: pointer;
